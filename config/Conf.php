@@ -13,7 +13,7 @@ class Conf {
     'login' => 'decadollem',
     // A l'IUT, c'est votre mdp (INE par defaut)
     // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-    'password' => '1109035104P'
+    'password' => 'ornithorinque'
   );
    
   static public function getLogin() {
