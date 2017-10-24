@@ -71,7 +71,7 @@ class ModelProduit {
 
     // un constructeur
     public function __construct($n = NULL, $p = NULL, $s = NULL, $l = NULL, $d = NULL) {
-        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+        if (!is_null($n) && !is_null($p) && !is_null($s)  && !is_null($l)  && !is_null($d)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
