@@ -85,12 +85,6 @@ class ModelProduit {
         }
     }
 
-    // une methode d'affichage.
-   /* public function afficher() {
-        echo "<ul><li>" . $this->marque . "</li>";
-        echo "<li>" . $this->immatriculation . "</li>";
-        echo "<li>" . $this->couleur . "</li></ul>";
-    } */
 
     static public function getAllProduit() {
         $rep = Model::$pdo->query('SELECT * FROM P_Produit');
@@ -100,7 +94,7 @@ class ModelProduit {
     }
     
     static public function getProduitById($id) {
-    $sql = "SELECT * from Voiture WHERE immatriculation=:nom_tag";
+    $sql = "SELECT * from P_Produit WHERE id=:nom_tag";
     // Préparation de la requête
     $req_prep = Model::$pdo->prepare($sql);
 
