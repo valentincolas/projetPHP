@@ -89,7 +89,16 @@ class ModelAddresse {
     return $tab_voit[0];
     }
     public function save(){
-        //à faire pendant les vacances proprement avec les prep
+        $sql  = "Insert INTO P_Addresse values (id, rue , ville, code_postal, pays)";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "id" => $this->id,
+            "rue" => $this->rue,
+            "ville" => $this->ville,
+            "code_postal" => $this->code_postal,
+            "pays" => $this->pays,
+       );
+        $req_prep->execute($values);
     }
    
     
