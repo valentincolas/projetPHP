@@ -115,16 +115,20 @@ class ModelProduit {
 }
 
     public function save(){
-    $sql = "INSERT INTO P_Produit (id, nom, prix, stock, lien_image, description) VALUES ('$this->id',$this->nom',
-            '$this->prix', 
-            '$this->stock', 
-            '$this->lien_image',
-            '$this->description' )";
-    $req_prep = Model::$pdo->prepare($sql);
-    Model::$pdo->query($req_prep);
-}
+         
+        $sql  = "Insert INTO P_Addresse values (id, nom , prix, stock, lien_image, description)";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "id" => $this->id,
+            "nom" => $this->nom,
+            "prix" => $this->prix,
+            "stock" => $this->stock,
+            "lien_image" => $this->lien_image,
+            "description" => $this->description,
+       );
+        $req_prep->execute($values);
 
-    
+    }
 }
     
 
