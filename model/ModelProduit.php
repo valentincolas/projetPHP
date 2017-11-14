@@ -112,7 +112,7 @@ class ModelProduit {
 
     public function save(){
          
-        $sql  = "Insert INTO P_Addresse values (null, nom , prix, stock, lien_image, description)";
+        $sql  = "Insert INTO P_Addresse values (null, :nom , :prix, :stock, :lien_image, :description)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "nom" => $this->nom,
