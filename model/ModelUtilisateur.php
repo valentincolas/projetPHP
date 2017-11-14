@@ -1,14 +1,13 @@
 <?php
 require_once "Model.php";
 
-class ModelVoiture {
+class ModelUtilisateur {
 	   
 	private $id;
 	private $login;
 	private $mdp;
         private $nom;
         private $prenom;
-        private static $id_ext = 0;
 	            
 	public function getId() {
 		return $this->id;  
@@ -48,8 +47,6 @@ class ModelVoiture {
 	  
 	public function __construct($l = NULL, $m = NULL, $n = NULL, $p = NULL) {
             if (!is_null($l) && !is_null($m) && !is_null($n) && !is_null($p)) {
-                $this->id = ModelUtilisateur::$id_ext;
-                ModelUtilisateur::$id_ext++;
                 $this->login = $l;
                 $this->mdp = $m;
                 $this->nom = $n;
@@ -98,10 +95,9 @@ class ModelVoiture {
         }
         
         public function save(){
-            $sql = "INSERT INTO P_Utilisateur (id, login, mdp, nom, prenom) VALUES ('$tag_id', '$tag_login', MD5('$tag_mdp'), '$tag_nom', '$tag_prenom')";
+            $sql = "INSERT INTO P_Utilisateur (id, login, mdp, nom, prenom) VALUES (null, :tag_login, MD5(:tag_mdp), :tag_nom, :tag_prenom)";;
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "tag_id" => $this->id,
                 "tag_login" => $this->login,
                 "tag_mdp" => $this->mdp,
                 "tag_nom" => $this->nom,
@@ -109,7 +105,7 @@ class ModelVoiture {
             );
             
             $req_prep->execute($values);
-	}
+        }
 
 }
 ?>
