@@ -1,6 +1,6 @@
 <?php
 require_once "Model.php";
-class ModelVoiture {
+class ModelContenuCommande {
 	   
 	private $id_commande;
 	private $id_produit;
