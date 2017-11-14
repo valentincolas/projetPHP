@@ -2,7 +2,6 @@
 require_once 'Model.php';
 class ModelAddresse {
 
-    private static $compteurID = 0;
     private $id;
     private $rue;
     private $ville;
@@ -53,8 +52,6 @@ class ModelAddresse {
         if (!is_null($r) && !is_null($v) && !is_null($cp),  && !is_null($p)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
-            $this->$id = ModelAddresse::$compteurID;
-            ModelAddresse::$compteurID++;
             $this->rue = $r;
             $this->ville = $v;
             $this->code_postal = $cp;
@@ -89,10 +86,9 @@ class ModelAddresse {
     return $tab_voit[0];
     }
     public function save(){
-        $sql  = "Insert INTO P_Addresse values (id, rue , ville, code_postal, pays)";
+        $sql  = "Insert INTO P_Addresse values (null, rue , ville, code_postal, pays)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
-            "id" => $this->id,
             "rue" => $this->rue,
             "ville" => $this->ville,
             "code_postal" => $this->code_postal,
