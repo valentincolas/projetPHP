@@ -98,8 +98,18 @@ class ModelVoiture {
         }
         
         public function save(){
-            Model::$pdo->query("INSERT INTO P_Utilisateur (id, login, mdp, nom, prenom) VALUES (\"" . $this->id . "\"" . "," . "\"" . $this->login . "\"" . "," . "\"" . $this->mdp . "\"" . "," . "\"" . $this->nom . "\"" . "," . "\"" . $this->prenom . "\")");
-        }
+            $sql = "INSERT INTO P_Utilisateur (id, login, mdp, nom, prenom) VALUES ('$tag_id', '$tag_login', MD5('$tag_mdp'), '$tag_nom', '$tag_prenom')";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "tag_id" => $this->id,
+                "tag_login" => $this->login,
+                "tag_mdp" => $this->mdp,
+                "tag_nom" => $this->nom,
+                "tag_prenom" => $this->prenom,
+            );
+            
+            $req_prep->execute($values);
+	}
 
 }
 ?>
