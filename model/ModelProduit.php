@@ -4,8 +4,6 @@ require_once 'Model.php';
 
 class ModelProduit {
 
-
-    private static $compteurID = 0;
     private $id;
     private $nom;
     private $prix;
@@ -75,8 +73,6 @@ class ModelProduit {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             // donc on retombe sur le constructeur à 3 arguments
-            $this->$id = ModelProduit::$compteurID;
-            ModelProduit::$compteurID++;
             $this->nom = $n;
             $this->prix = $p;
             $this->stock = $s;
@@ -116,10 +112,9 @@ class ModelProduit {
 
     public function save(){
          
-        $sql  = "Insert INTO P_Addresse values (id, nom , prix, stock, lien_image, description)";
+        $sql  = "Insert INTO P_Addresse values (null, nom , prix, stock, lien_image, description)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
-            "id" => $this->id,
             "nom" => $this->nom,
             "prix" => $this->prix,
             "stock" => $this->stock,
