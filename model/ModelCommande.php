@@ -7,9 +7,8 @@ Class ModelCommande {
   private $id_adresse;
       
   // un constructeur
-   public function __construct($i = NULL, $iu = NULL, $ia = NULL) {
+   public function __construct($iu = NULL, $ia = NULL) {
    if (!is_null($i) && !is_null($iu) && !is_null($ia)) {
-   $this->id = $i;
    $this->id_utilisateur = $iu;
    $this->id_adresse = $ia;
    }
