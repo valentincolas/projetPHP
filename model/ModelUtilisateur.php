@@ -21,11 +21,11 @@ class ModelUtilisateur {
 	    $this->marque = $log;
 	}
 	
-	public function getmdp() {
+	public function getMdp() {
 		return $this->mdp;  
 	}
 		     
-	public function setmdp($mdp2) {
+	public function setMdp($mdp2) {
 	    $this->couleur = $mdp2;
 	}
 	
