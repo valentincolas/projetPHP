@@ -34,7 +34,7 @@ class ModelVoiture {
             }
         } 
         
-        public static function getAllUtilisateur(){
+        public static function getAllCoCommande(){
             $rep = Model::$pdo->query("SELECT * FROM P_Contenu_Commande");
             $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelContenuCommande');
             $tab_voit = $rep->fetchAll();
@@ -42,7 +42,7 @@ class ModelVoiture {
         }
 	
         
-        public static function getUtilisateurById($idCommande) {
+        public static function getCoCommandeById($idCommande) {
             $sql = "SELECT * from P_Contenu_Commande WHERE id=:nom_tag";
             // Préparation de la requête
             $req_prep = Model::$pdo->prepare($sql);
