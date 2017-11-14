@@ -86,7 +86,7 @@ class ModelAddresse {
     return $tab_voit[0];
     }
     public function save(){
-        $sql  = "Insert INTO P_Addresse values (null, rue , ville, code_postal, pays)";
+        $sql  = "Insert INTO P_Addresse values (null, :rue , :ville, :code_postal, :pays)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "rue" => $this->rue,
