@@ -65,5 +65,16 @@ class ModelContenuCommande {
         public function save(){
             Model::$pdo->query("INSERT INTO P_Contenu_Commande (id_commande, id_produit, quantite ) VALUES (\"" . $this->id_commande . "\"" . "," . "\"" . $this->id_produit . "\"" . "," . "\"" . $this->quantite . "\")");
         }
+	
+	public function save(){
+            $sql = "INSERT INTO P_Contenu_Commande (id_Commande, id_Produit, Quantite) VALUES (null, :tag_id_Produit, :tag_Qunatite)";;
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "tag_id_Produit" => $this->id_Produit,
+		"tag_Quantite" => $this->Quantite,    
+            );
+            
+            $req_prep->execute($values);
+    }
 }
 ?>
