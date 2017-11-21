@@ -35,7 +35,7 @@ class ControllerUtilisateur {
         $i = 0;
         $tab_u = ModelUtilisateur::getAllUtilisateur();
         foreach ($tab_u as $u){
-            if($u->getLogin() == $_POST['login'] && $u->getMdp() == MD5($_POST['mdp'])){$i = 1;}
+            if($u->getLogin() == $_POST['login'] && $u->getMdp() == MD5(ModelUtilisateur::getSeed() . $_POST['mdp'])){$i = 1;}
         }
         if($i == 1){
             require (File::build_path(array('view','Utilisateur','TESTLOGIN.php')));
