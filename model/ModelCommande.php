@@ -7,8 +7,8 @@ Class ModelCommande {
   private $id_adresse;
       
   // un constructeur
-   public function __construct($iu = NULL, $ia = NULL) {
-   if (!is_null($i) && !is_null($iu) && !is_null($ia)) {
+   public function __construct( $iu = NULL, $ia = NULL) {
+   if (!is_null($iu) && !is_null($ia)) {
    $this->id_utilisateur = $iu;
    $this->id_adresse = $ia;
    }
@@ -98,8 +98,8 @@ Class ModelCommande {
             $sql = "INSERT INTO P_Commande (id, id_Utilisateur, id_Adresse) VALUES (null, :tag_id_Utilisateur, :tag_id_Adresse)";;
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "tag_id_Utilisateur" => $this->id_Utilisateur,
-                "tag_id_Adresse" => $this->id_Adresse,
+                "tag_id_Utilisateur" => $this->id_utilisateur,
+                "tag_id_Adresse" => $this->id_adresse,
             );
             
             $req_prep->execute($values);
