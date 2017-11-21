@@ -8,7 +8,12 @@ class ModelUtilisateur {
 	private $mdp;
         private $nom;
         private $prenom;
-	            
+        private static $seed = "UjDmvjAyLr";
+	          
+        static public function getSeed() {
+            return self::$seed;
+        }
+        
 	public function getId() {
 		return $this->id;  
 	}
@@ -99,7 +104,7 @@ class ModelUtilisateur {
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
                 "tag_login" => $this->login,
-                "tag_mdp" => $this->mdp,
+                "tag_mdp" => self::$seed . $this->mdp,
                 "tag_nom" => $this->nom,
                 "tag_prenom" => $this->prenom,
             );
