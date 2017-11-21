@@ -49,7 +49,7 @@ class ModelAddresse {
     
     // un constructeur
     public function __construct($r = NULL, $v = NULL, $cp = NULL, $p = NULL) {
-        if (!is_null($r) && !is_null($v) && !is_null($cp),  && !is_null($p)) {
+        if (!is_null($r) && !is_null($v) && !is_null($cp) && !is_null($p)) {
             // Si aucun de $m, $c et $i sont nuls,
             // c'est forcement qu'on les a fournis
             $this->rue = $r;

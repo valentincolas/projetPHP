@@ -18,7 +18,7 @@ class ModelProduit {
     }
 
     // un setter 
-    public function setID($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 
@@ -112,7 +112,7 @@ class ModelProduit {
 
     public function save(){
          
-        $sql  = "Insert INTO P_Addresse values (null, :nom , :prix, :stock, :lien_image, :description)";
+        $sql  = "Insert INTO P_Produit values (null, :nom , :prix, :stock, :lien_image, :description)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "nom" => $this->nom,
@@ -122,7 +122,15 @@ class ModelProduit {
             "description" => $this->description,
        );
         $req_prep->execute($values);
-
+    }
+    
+    public function delete(){
+        $sql = "DELETE from P_Produit where id = :id";
+        $req_prep = Model::$pdo->prepare($sql);
+        $value = array(
+            "id" => $this->id,
+       );
+        $req_prep->execute($value);
     }
 }
     
