@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php 
+if(!isset($_SESSION)){
+    session_start();
+}
+?>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -9,7 +14,7 @@
 <body>
 
     <header>
-	<a href="index.html"><img src="../images/banniere.png" class="banniere"></a>
+	<a href="../index.html"><img src="../images/banniere.png" class="banniere"></a>
     <div class="burger">
         <img src="../images/burger.png" alt="burger" width="50px">
         <div id="menu2">
@@ -24,19 +29,20 @@
     
     
     <nav class="nav">
-            <div><span class="puce">→</span><a href="./produit.html">Produit</a></div>
+            <div><span class="puce">→</span><a href="../controller/Routeur.php?table=ControllerProduit&action=readAll">Produit</a></div>
             <div><span class="puce">→</span><a href="./contact.html">Contact</a></div>
             <div><span class="puce">→</span><a href="./equipe.html">Equipe</a></div>
             <div><span class="puce">→</span><a href="./presse.html">Presse</a></div>
-            <div><span class="puce">→</span><a href="./nousrejoindre.html">Nous rejoindre</a>
-                <div  class="submenu">
-                    <div><span class="puce">→</span><a href="./physicien.html">Physicien</a></div>
-                    <div><span class="puce">→</span><a href="./mathematicien.html">Mathématicien</a></div>
-                    <div><span class="puce">→</span><a href="./designer.html">Designer</a></div>
-                </div>
-            </div>
-            <div><span class="puce">→</span><a href="./controller/Routeur.php?table=ControllerUtilisateur&action=create">Connexion/S'inscrire</a></div>
- 
+            <div><span class="puce">→</span><a href="./nousrejoindre.html">Panier</a></div>
+            <?php
+                if(isset($_SESSION['login'])){
+                    $u = ModelUtilisateur::getUtilisateurByLogin($_SESSION['login']);
+                    echo "<div><span class=\"puce\">→</span><a href=\"../controller/Routeur.php?table=ControllerUtilisateur&action=read&id=". $u->getId() ."\">" . $_SESSION['login'] . "</a></div>";
+                }else {
+                    echo "<div><span class=\"puce\">→</span><a href=\"../controller/Routeur.php?table=ControllerUtilisateur&action=create\">Connexion/S'inscrire</a></div>";
+                }
+                
+            ?>
         </nav>
     </header>
     <main>
