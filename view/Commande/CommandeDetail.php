@@ -6,10 +6,10 @@
     </head>
     <body>
         <?php
-        echo "<ul>";
-		echo "<li> id_utilisateur: " . $u->getLogin() . "\n </li>";
-		echo "<li> id_adresse: " . $u->getNom() . "\n </li>";
-        echo "</ul>";
+                echo "<ul>";
+		echo "<li> id_utilisateur: " .htmlspecialchars( $u->getIdUtilisateur()) . "\n </li>";
+		echo "<li> id_adresse: " . htmlspecialchars($u->getIdAdresse()) . "\n </li>";
+                echo "</ul>";
 		echo "<br>";
         ?>
     </body>
