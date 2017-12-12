@@ -3,20 +3,20 @@
 Class ModelCommande {
 
   private $id;
-  private $id_utilisateur;
-  private $id_adresse;
+  private $id_Utilisateur;
+  private $id_Adresse;
       
   // un constructeur
    public function __construct( $iu = NULL, $ia = NULL) {
    if (!is_null($iu) && !is_null($ia)) {
-   $this->id_utilisateur = $iu;
-   $this->id_adresse = $ia;
+   $this->id_Utilisateur = $iu;
+   $this->id_Adresse = $ia;
    }
   } 
            
   // une methode d'affichage.
   public function afficher() {
-    echo $this->id,"<br>", $this->id_utilisateur,"<br>", $this->id_adresse;
+    echo $this->id,"<br>", $this->id_Utilisateur,"<br>", $this->id_Adresse;
   }
       
   public function getId() {
@@ -28,19 +28,19 @@ Class ModelCommande {
   }
      
   public function getIdUtilisateur() {
-       return $this->id_utilisateur;  
+       return $this->id_Utilisateur;  
   } 
   
    public function setIdUtilisateur($utilisateur) {
-       $this->id_utilisateur = $utilisateur;     
+       $this->id_Utilisateur = $utilisateur;     
   }
         
   public function getIdAdresse() {
-       return $this->id_adresse;  
+       return $this->id_Adresse;  
   }
   
   public function setIdAdresse($adresse) {
-       $this->id_adresse = $adresse;     
+       $this->id_Adresse = $adresse;     
   }
   
    public static function getAllCommande(){
@@ -52,7 +52,7 @@ Class ModelCommande {
    
   
    public static function getCommandeById($id) {
-    $sql = "SELECT * from commande WHERE id=:nom_tag";
+    $sql = "SELECT * from P_Commande WHERE id=:nom_tag";
     // Préparation de la requête
     $req_prep = Model::$pdo->prepare($sql);
 
@@ -73,7 +73,7 @@ Class ModelCommande {
 }
   
    public static function getCommandeByIdUtilisateur($id_Utilisateur2) {
-    $sql = "SELECT * from commande WHERE id_Utilisateur=:nom_tag";
+    $sql = "SELECT * from P_Commande WHERE id_Utilisateur=:nom_tag";
     // Préparation de la requête
     $req_prep = Model::$pdo->prepare($sql);
 
@@ -98,14 +98,34 @@ Class ModelCommande {
             $sql = "INSERT INTO P_Commande (id, id_Utilisateur, id_Adresse) VALUES (null, :tag_id_Utilisateur, :tag_id_Adresse)";;
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
-                "tag_id_Utilisateur" => $this->id_utilisateur,
-                "tag_id_Adresse" => $this->id_adresse,
+                "tag_id_Utilisateur" => $this->id_Utilisateur,
+                "tag_id_Adresse" => $this->id_Adresse,
             );
             
             $req_prep->execute($values);
     }
-
-
+    
+    public function delete(){
+            $sql = "DELETE FROM P_Commande WHERE id=:id";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "id" => $this->id,
+            );
+            
+            $req_prep->execute($values);
+    }
+    
+    public function update(){
+            $sql = "UPDATE P_Commande SET id_Utilisateur = :id_Utilisateur , id_Adresse = :id_Adresse WHERE id=:id";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                ":id_Utilisateur" => $this->id_Utilisateur,
+                ":id_Adresse" => $this->id_Adresse,
+                "id" => $this->id,
+            );
+            
+            $req_prep->execute($values);
+    }
 
 }
 ?>
