@@ -2,10 +2,10 @@
 require_once('../lib/File.php');
 require_once (File::build_path(array('model','ModelCommande.php'))); // chargement du modèle
 
-class ControllerCommande {
+class ControllerCommande  {
 	
     public static function read(){
-        $u = ModelCommande::getCommandeById($_GET['id']);
+        $u = ModelCommande::select($_GET['id']);
         if($u == false){
             $controller = "Commande";
             $view = "ErreurCommandeId";
@@ -20,7 +20,7 @@ class ControllerCommande {
     }
     
     public static function readAll() {
-        $tab_c= ModelCommande::getAllCommande();
+        $tab_c= ModelCommande::selectAll();
         
         $controller = "Commande";
         $view = "ListeCommande";
@@ -47,14 +47,14 @@ class ControllerCommande {
     
     public static function delete(){
     
-        $u = ModelCommande::getCommandeById($_GET['id']);
+        $u = ModelCommande::select($_GET['id']);
         if($u == false){
             $controller = "Commande";
             $view = "ErreurCommandeId";
             $page_title = " Erreur supression "; 
             require(File::build_path(array('view','view.php')));
         } else {
-            $u->delete();
+            ModelCommande::delete($_GET['id']);
         } 
     }
     
