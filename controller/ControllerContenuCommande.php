@@ -1,11 +1,11 @@
 <?php
 require_once('../lib/File.php');
-require_once (File::build_path(array('model','ModelContenuCommande.php'))); // chargement du modèle
+require_once (File::build_path(array('model','ModelContenu_Commande.php'))); // chargement du modèle
 
 class ControllerContenuCommande {
 	
     public static function read(){
-        $u = ModelContenuCommande::getContenuCommandeById($_GET['id']);
+        $u = ModelContenu_Commande::getContenuCommandeById($_GET['id']);
         if($u == false){
             $controller = "ContenuCommande";
             $view = "ErreurContenuCommande";
@@ -20,7 +20,7 @@ class ControllerContenuCommande {
     }
     
     public static function readAll() {
-        $tab_c= ModelContenuCommande::getAllContenuCommande();
+        $tab_c= ModelContenu_Commande::selectAll();
         $controller = "ContenuCommande";
         $view = "ListeContenuCommande";
         $page_title = " Liste des commandes ";
@@ -39,27 +39,27 @@ class ControllerContenuCommande {
                 $controller = "ContenuCommande";
                 $view = "CreateContenucommande";
                 $page_title = " Creation commande ";
-		$u = new ModelContenuCommande($_POST['idCommande'], $_POST['idProduit'], $_POST['quantite']);
+		$u = new ModelContenu_Commande($_POST['idCommande'], $_POST['idProduit'], $_POST['quantite']);
 		$u->save();
         
     }
     
     public static function delete(){
     
-        $u = ModelContenuCommande::getContenuCommandeById($_GET['id']);
+        $u = ModelContenu_Commande::getContenuCommandeById($_GET['id']);
         if($u == false){
             $controller = "ContenuCommande";
             $view = "ErreurContenuCommandeId";
             $page_title = " Erreur supression "; 
             require(File::build_path(array('view','view.php')));
         } else {
-            $u->delete();
+            ModelContenu_Commande::delete($_GET['id']);
         } 
     }
     
     public static function update(){   
         
-        $u = ModelContenuCommande::getContenuCommandeById($_GET['id']);
+        $u = ModelContenu_Commande::getContenuCommandeById($_GET['id']);
         if($u == false){
             $controller = "ContenuCommande";
             $view = "ErreurContenuCommandeId";
