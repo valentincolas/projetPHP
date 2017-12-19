@@ -33,7 +33,6 @@ class ControllerAddresse {
         $view = 'CreateAddresse';
         $pagetitle = 'Creation Adresse';
         require (File::build_path(array('view', 'view.php')));
-        header('Location: http://webinfo.iutmontp.univ-montp2.fr/~colasv/PhpProject2/controller/Routeur.php?table=ControllerAdresse&action=readAll');
     }
 
     public static function created() {
@@ -53,6 +52,7 @@ class ControllerAddresse {
             $a = new ModelAddresse($_POST['rue'], $_POST['ville'], $_POST['codepostal'], $_POST['pays']);
             $a->save();
         }
+        header('Location: ../controller/Routeur.php?table=ControllerAddresse&action=readAll');
     }
 
     public static function deleted() {
@@ -63,7 +63,7 @@ class ControllerAddresse {
             $pagetitle = 'Erreur Adresse';
             require (File::build_path(array('view', 'view.php')));
         } else {
-           ModelAddresse::delete($_GET['id']);
+            ModelAddresse::delete($_GET['id']);
         }
     }
 

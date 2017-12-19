@@ -16,7 +16,7 @@ class ControllerPanier {
     
     public static function supprimer(){
         ModelPanier::supprimerArticle($_GET[l]);
-        header('Location: http://webinfo.iutmontp.univ-montp2.fr/~colasv/PhpProject2/controller/Routeur.php?table=ControllerPanier&action=read');
+        header('Location: ../controller/Routeur.php?table=ControllerPanier&action=read');
     }
        
 

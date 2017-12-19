@@ -52,7 +52,7 @@ class ControllerProduit {
         } else {
             $p = new ModelProduit($_POST['nom'], $_POST['prix'], $_POST['stock'], $_POST['lien'], $_POST['description']);
             $p->save();
-            header('Location: http://webinfo.iutmontp.univ-montp2.fr/~colasv/PhpProject2/controller/Routeur.php?table=ControllerProduit&action=readAll');
+            header('Location: ../controller/Routeur.php?table=ControllerProduit&action=readAll');
         }
     }
 
@@ -65,7 +65,7 @@ class ControllerProduit {
             require (File::build_path(array('view', 'view.php')));
         } else {
             ModelProduit::delete($_GET['id']);
-            header('Location: http://webinfo.iutmontp.univ-montp2.fr/~colasv/PhpProject2/controller/Routeur.php?table=ControllerProduit&action=readAll');
+            header('Location: ../controller/Routeur.php?table=ControllerProduit&action=readAll');
         }
     }
     
