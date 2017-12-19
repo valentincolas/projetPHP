@@ -1,19 +1,21 @@
 <?php
 require_once 'Model.php';
-class ModelAddresse {
+class ModelAddresse extends Model {
 
     private $id;
     private $rue;
     private $ville;
     private $code_postal;
-    private $pays;
+    private $pays;    
+    protected static $object='Addresse';
+    protected static $primary='id';
     
     // un getter      
     public function getId() {
         return $this->id;
     }
     // un setter 
-    public function setID($id) {
+    public function setId($id) {
         $this->id = $id;
     }
     public function getRue() {
@@ -60,31 +62,7 @@ class ModelAddresse {
     }
  
 
-    static public function getAllAddresse() {
-        $rep = Model::$pdo->query('SELECT * FROM P_Addresse');
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelAddresse');
-        $tab_voit = $rep->fetchAll();
-        return $tab_voit;
-    }
     
-    static public function getAddresseById($id) {
-    $sql = "SELECT * from P_Addresse WHERE id=:nom_tag";
-    // Préparation de la requête
-    $req_prep = Model::$pdo->prepare($sql);
-    $values = array(
-        "nom_tag" => $id,
-        //nomdutag => valeur, ...
-    );
-    // On donne les valeurs et on exécute la requête	 
-    $req_prep->execute($values);
-    // On récupère les résultats comme précédemment
-    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelAddresse');
-    $tab_voit = $req_prep->fetchAll();
-    // Attention, si il n'y a pas de résultats, on renvoie false
-    if (empty($tab_voit))
-        return false;
-    return $tab_voit[0];
-    }
     public function save(){
         $sql  = "Insert INTO P_Addresse values (null, :rue , :ville, :code_postal, :pays)";
         $req_prep = Model::$pdo->prepare($sql);
@@ -96,6 +74,18 @@ class ModelAddresse {
        );
         $req_prep->execute($values);
     }
-   
     
+   
+    /* public function update(){
+        $sql  = "UPDATE P_Addresse SET rue = :rue, ville = :ville, code_postal = :code_postal, pays = :pays WHERE id = :id ";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "id" => $this->id,
+            "rue" => $this->rue,
+            "ville" => $this->ville,
+            "code_postal" => $this->code_postal,
+            "pays" => $this->pays,
+       );
+        $req_prep->execute($values);
+    }*/
 }

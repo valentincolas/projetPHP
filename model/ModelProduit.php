@@ -2,7 +2,7 @@
 
 require_once 'Model.php';
 
-class ModelProduit {
+class ModelProduit extends Model{
 
     private $id;
     private $nom;
@@ -10,6 +10,8 @@ class ModelProduit {
     private $stock;
     private $lien_image;
     private $description;
+    protected static $object='Produit';
+    protected static $primary='id';
     
 
     // un getter      
@@ -82,33 +84,7 @@ class ModelProduit {
     }
 
 
-    static public function getAllProduit() {
-        $rep = Model::$pdo->query('SELECT * FROM P_Produit');
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-        $tab_voit = $rep->fetchAll();
-        return $tab_voit;
-    }
-    
-    static public function getProduitById($id) {
-    $sql = "SELECT * from P_Produit WHERE id=:nom_tag";
-    // Préparation de la requête
-    $req_prep = Model::$pdo->prepare($sql);
-
-    $values = array(
-        "nom_tag" => $id,
-        //nomdutag => valeur, ...
-    );
-    // On donne les valeurs et on exécute la requête	 
-    $req_prep->execute($values);
-
-    // On récupère les résultats comme précédemment
-    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-    $tab_voit = $req_prep->fetchAll();
-    // Attention, si il n'y a pas de résultats, on renvoie false
-    if (empty($tab_voit))
-        return false;
-    return $tab_voit[0];
-}
+ 
 
     public function save(){
          
@@ -124,14 +100,21 @@ class ModelProduit {
         $req_prep->execute($values);
     }
     
-    public function delete(){
-        $sql = "DELETE from P_Produit where id = :id";
+  
+    
+     /*public static function update(){
+        $sql  = "UPDATE P_Produit SET nom = :nom, prix = :prix, stock = :stock, lien_image = :lien_image, description = :description where id = :id ";
         $req_prep = Model::$pdo->prepare($sql);
-        $value = array(
+        $values = array(
             "id" => $this->id,
+            "nom" => $this->nom,
+            "prix" => $this->prix,
+            "stock" => $this->stock,
+            "lien_image" => $this->lien_image,
+            "description" => $this->description,
        );
-        $req_prep->execute($value);
-    }
+        $req_prep->execute($values);
+    }*/
 }
     
 
