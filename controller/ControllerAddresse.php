@@ -6,7 +6,7 @@ require_once (File::build_path(array('model', 'ModelAddresse.php'))); // chargem
 class ControllerAddresse {
 
     public static function read() {
-        $a = ModelAddresse::getAddresseById($_GET['id']);
+        $a = ModelAddresse::select($_GET['id']);
         if ($a == false) {
             $controller = "Addresse";
             $view = 'ErreurAddresseId';
@@ -21,7 +21,7 @@ class ControllerAddresse {
     }
 
     public static function readAll() {
-        $tab_a = ModelAddresse::getAllAddresse(); //appel au modèle pour gerer la BD
+        $tab_a = ModelAddresse::selectAll(); //appel au modèle pour gerer la BD
         $controller = "Addresse";
         $view = 'ListeAddresse';
         $pagetitle = 'Liste Adresse';
@@ -33,11 +33,12 @@ class ControllerAddresse {
         $view = 'CreateAddresse';
         $pagetitle = 'Creation Adresse';
         require (File::build_path(array('view', 'view.php')));
+        header('Location: http://webinfo.iutmontp.univ-montp2.fr/~colasv/PhpProject2/controller/Routeur.php?table=ControllerAdresse&action=readAll');
     }
 
     public static function created() {
         $i = 0;
-        $tab_a = ModelAddresse::getAllAddresse();
+        $tab_a = ModelAddresse::selectAll();
         foreach ($tab_a as $a) {
             if ($a->getVille() == $_POST['ville'] && $a->getCodePostal() == $_POST['codepostal'] && $a->getRue() == $_POST['rue'] && $a->getPays() == $_POST['pays']) {
                 $i = 1;
@@ -55,14 +56,14 @@ class ControllerAddresse {
     }
 
     public static function deleted() {
-        $a = ModelAddresse::getAddresseById($_GET['id']);
+        $a = ModelAddresse::selectAll($_GET['id']);
         if ($a == false) {
             $controller = "Addresse";
             $view = 'ErreurAddresseId.php';
             $pagetitle = 'Erreur Adresse';
             require (File::build_path(array('view', 'view.php')));
         } else {
-            $a->delete();
+           delete($_GET['id']);
         }
     }
 
