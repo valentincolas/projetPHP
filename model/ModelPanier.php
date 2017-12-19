@@ -12,6 +12,7 @@ abstract class ModelPanier {
     static public function creationPanier() {
         if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = array();
+             $_SESSION['panier']['id'] = array();
             $_SESSION['panier']['libelleProduit'] = array();
             $_SESSION['panier']['qteProduit'] = array();
             $_SESSION['panier']['prixProduit'] = array();
@@ -27,7 +28,7 @@ abstract class ModelPanier {
      * @param float $prixProduit
      * @return void
      */
-    static public function ajouterArticle($libelleProduit, $qteProduit, $prix) {
+    static public function ajouterArticle($libelleProduit, $qteProduit, $prix, $id) {
 
         //Si le panier existe
         if (ModelPanier::creationPanier() && !ModelPanier::isVerrouille()) {
@@ -41,6 +42,7 @@ abstract class ModelPanier {
                 array_push($_SESSION['panier']['libelleProduit'], $libelleProduit);
                 array_push($_SESSION['panier']['qteProduit'], $qteProduit);
                 array_push($_SESSION['panier']['prixProduit'], $prix);
+                array_push($_SESSION['panier']['id'], $id);
             }
         } else
             echo "Un problème est survenu veuillez contacter l'administrateur du site.";
@@ -82,6 +84,7 @@ abstract class ModelPanier {
             $tmp['libelleProduit'] = array();
             $tmp['qteProduit'] = array();
             $tmp['prixProduit'] = array();
+            $tmp['id'] = array();
             $tmp['verrou'] = $_SESSION['panier']['verrou'];
 
             for ($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++) {
@@ -89,6 +92,7 @@ abstract class ModelPanier {
                     array_push($tmp['libelleProduit'], $_SESSION['panier']['libelleProduit'][$i]);
                     array_push($tmp['qteProduit'], $_SESSION['panier']['qteProduit'][$i]);
                     array_push($tmp['prixProduit'], $_SESSION['panier']['prixProduit'][$i]);
+                    array_push($tmp['id'], $_SESSION['panier']['id'][$i]);
                 }
             }
             //On remplace le panier en session par notre panier temporaire à jour
