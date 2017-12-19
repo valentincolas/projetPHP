@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 require_once('../lib/File.php');
 require_once (File::build_path(array('model', 'ModelPanier.php'))); // chargement du modèle
 

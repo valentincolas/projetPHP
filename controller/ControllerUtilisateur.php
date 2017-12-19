@@ -2,7 +2,9 @@
 require_once('../lib/File.php');
 require_once('../lib/Security.php');
 require_once (File::build_path(array('model','ModelUtilisateur.php'))); // chargement du modèle
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 class ControllerUtilisateur {
     
     public static function readAll(){
@@ -52,7 +54,7 @@ class ControllerUtilisateur {
             
             $to = $_POST['email'];
             $subject = "Verfication email";
-            $message = "\n http://webinfo.iutmontp.univ-montp2.fr/~decadollem/ProjetPHP/controller/Routeur.php?table=ControllerUtilisateur&action=validate&id=" . ModelUtilisateur::getUtilisateurByLogin($_POST['login'])->getId() . "&nonce=" . $nonce;
+            $message = "\n http://webinfo.iutmontp.univ-montp2.fr/~decadollem/ProjetPHP/controller/Routeur.php?table=ControllerUtilisateur&action=validate&id=" . htmlspecialchars(ModelUtilisateur::getUtilisateurByLogin($_POST['login'])->getId()) . "&nonce=" . $nonce;
             mail($to, $subject, $message);
             echo "Un mail de verification vous a été envoyé.";
             ControllerProduit::readAll();
@@ -143,6 +145,7 @@ class ControllerUtilisateur {
     
     public static function deconnect(){
         unset($_SESSION['login']);
+        unset($_SESSION['admin']);
         ControllerProduit::readAll();
     }
     
