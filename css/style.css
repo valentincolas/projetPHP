@@ -139,4 +139,11 @@ main{
     height:5vw;
 }
 
+.imageproduit{
+   width: 18.5vw;
+   height: 18.5vw;
+   display:inline-block;
+   margin: 0.5%;
+}
+
 
