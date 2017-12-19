@@ -63,7 +63,7 @@ class ControllerAddresse {
             $pagetitle = 'Erreur Adresse';
             require (File::build_path(array('view', 'view.php')));
         } else {
-           delete($_GET['id']);
+           ModelAddresse::delete($_GET['id']);
         }
     }
 
