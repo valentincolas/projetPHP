@@ -6,14 +6,17 @@
     </head>
     <body>
         <?php
-        echo  "<img src=\"" . htmlspecialchars($p->getLienImage()) . "\" alt=\"\" />\n ";
+        echo  "<img src=\"" . htmlspecialchars($p->getLienImage()) . "\" alt=\"". $p->getNom()."\" class = \"imageproduit\"/> ";
         echo "<ul>";
 	echo "<li> nom: " . htmlspecialchars($p->getNom()) . "\n </li>";
 	echo "<li> prix: " . htmlspecialchars($p->getPrix()) . "\n </li>";
 	echo "<li> stock: " . htmlspecialchars($p->getStock()) . "\n </li>";
         echo "<li> description: " . htmlspecialchars($p->getDescription()) . "\n </li>";
         echo "</ul>";
+        if($_SESSION['admin'] = 1){
         echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=deleted&id=' . $p->getId() . '">delete</a>' ;
+        }
+        echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=ajoutPanier&id=' . $p->getId() . '">ajouter au panier</a>' ;
        
 	echo "<br>";
         ?>
