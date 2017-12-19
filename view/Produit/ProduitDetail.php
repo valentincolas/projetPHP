@@ -13,10 +13,12 @@
 	echo "<li> stock: " . htmlspecialchars($p->getStock()) . "\n </li>";
         echo "<li> description: " . htmlspecialchars($p->getDescription()) . "\n </li>";
         echo "</ul>";
-        if($_SESSION['admin'] = 1){
-        echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=deleted&id=' . $p->getId() . '">delete</a>' ;
+        if(isset($_SESSION['admin'])){
+        if($_SESSION['admin'] == 1){
+        echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=deleted&id=' . $p->getId() . '"><input type="button" value="supprimer"></a>' ;
         }
-        echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=ajoutPanier&id=' . $p->getId() . '">ajouter au panier</a>' ;
+        }
+        echo '<a href="../controller/Routeur.php?table=ControllerProduit&action=ajoutPanier&id=' . $p->getId() . '"><input type="button" value="ajouter au panier"></a>' ;
        
 	echo "<br>";
         ?>
