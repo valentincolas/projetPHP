@@ -22,7 +22,6 @@ class Model {
         die();
       }
   }
-
    
    public static function selectAll(){
         $table_name = static::$object;
@@ -49,7 +48,6 @@ class Model {
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
-
         // On récupère les résultats comme précédemment
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab = $req_prep->fetchAll();
@@ -75,6 +73,40 @@ class Model {
         $req_prep->execute($values);
    }
    
+   public function save() {
+        $table_name = static::$object;
+        $class_name='Model'.ucfirst($table_name);
+        $table_name = "P_".$table_name;
+        $columnStr = "";
+        $valueStr = "";
+        $values = array();
+        $reflect = new ReflectionObject($this);
+        foreach ($reflect->getProperties(ReflectionProperty::IS_PRIVATE) as $prop) {
+            $col=$prop->getName();
+            $columnStr.= "$col, ";
+            $valueStr.= ":$col, ";
+            $get = "get".ucfirst($col);
+            $values[$col]=$this->$get();
+        }
+        
+        //Supprime la dernière ','
+        $columnStr = substr($columnStr, 0, -2);
+        $valueStr = substr($valueStr, 0, -2);
+        try {
+            $sql = "INSERT INTO $table_name ($columnStr) VALUES ($valueStr)";
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+
+        } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+                echo $e->getMessage();
+            } else {
+                echo 'Une erreur est survenue <a href="index.php"> retour à la page d\'accueil </a>';
+            }
+            return false;
+        }
+        return true;
+    }
    public static function update($primary_value){
        
    }
