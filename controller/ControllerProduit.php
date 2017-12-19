@@ -70,7 +70,7 @@ class ControllerProduit {
     }
     
     public static function ajoutPanier(){
-        $p = ModelProduit::getProduitById($_GET['id']);
+        $p = ModelProduit::select($_GET['id']);
         ModelPanier::ajouterArticle($p->getNom(),1,$p->getPrix());
             $controller = "Panier";
             $view = 'panier';
