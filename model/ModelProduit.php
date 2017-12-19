@@ -8,7 +8,7 @@ class ModelProduit extends Model{
     private $nom;
     private $prix;
     private $stock;
-    private $lien_image;
+    private $lienimage;
     private $description;
     protected static $object='Produit';
     protected static $primary='id';
@@ -52,12 +52,12 @@ class ModelProduit extends Model{
     }
     
      public function getLienImage() {
-        return $this->lien_image;
+        return $this->lienimage;
     }
 
     // un setter 
     public function setLienImage($lien_image) {
-        $this->lien_image = $lien_image;
+        $this->lienimage = $lienimage;
     }
     
      public function getDescription() {
@@ -78,7 +78,7 @@ class ModelProduit extends Model{
             $this->nom = $n;
             $this->prix = $p;
             $this->stock = $s;
-            $this->lien_image = $l;
+            $this->lienimage = $l;
             $this->description = $d;
         }
     }
@@ -86,7 +86,7 @@ class ModelProduit extends Model{
 
  
 
-    public function save(){
+    /*public function save(){
          
         $sql  = "Insert INTO P_Produit values (null, :nom , :prix, :stock, :lien_image, :description)";
         $req_prep = Model::$pdo->prepare($sql);
@@ -98,7 +98,7 @@ class ModelProduit extends Model{
             "description" => $this->description,
        );
         $req_prep->execute($values);
-    }
+    }*/
     
   
     

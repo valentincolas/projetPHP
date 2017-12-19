@@ -5,7 +5,7 @@ class ModelAddresse extends Model {
     private $id;
     private $rue;
     private $ville;
-    private $code_postal;
+    private $codepostal;
     private $pays;    
     protected static $object='Addresse';
     protected static $primary='id';
@@ -34,11 +34,11 @@ class ModelAddresse extends Model {
     }
     
      public function getCodePostal() {
-        return $this->code_postal;
+        return $this->codepostal;
     }
     // un setter 
     public function setCodePostal($code_postal) {
-        $this->code_postal = $code_postal;
+        $this->codepostal = $code_postal;
     }
     
      public function getPays() {
@@ -56,14 +56,14 @@ class ModelAddresse extends Model {
             // c'est forcement qu'on les a fournis
             $this->rue = $r;
             $this->ville = $v;
-            $this->code_postal = $cp;
+            $this->codepostal = $cp;
             $this->pays = $p;
         }
     }
  
 
     
-    public function save(){
+   /* public function save(){
         $sql  = "Insert INTO P_Addresse values (null, :rue , :ville, :code_postal, :pays)";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
@@ -73,7 +73,7 @@ class ModelAddresse extends Model {
             "pays" => $this->pays,
        );
         $req_prep->execute($values);
-    }
+    }*/
     
    
     /* public function update(){
